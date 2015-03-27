@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class MyActivity extends ActionBarActivity {
+
+    public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,15 @@ public class MyActivity extends ActionBarActivity {
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
         // Do something in response to button
-        // Activity es una subclase de contexto
+        // Activity is a subclass from context
         Intent intent = new Intent(this, DisplayMessageActivity.class);
+        // Get the field
+        EditText editText = (EditText) findViewById(R.id.edit_message);
+        // Get the data
+        String message = editText.getText().toString();
+        // Add the data into the new activity
+        intent.putExtra(EXTRA_MESSAGE, message);
+        // Init the activity
+        startActivity(intent);
     }
 }
